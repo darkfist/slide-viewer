@@ -17,7 +17,20 @@
 				{% for obj in object_list %}
 
 				       
-					
+						<div class="row row-0-gutter">
+						<div class="col-md-8 col-md-offset-2 col-0-gutter">
+							<h2><strong>{{ obj.title }}</strong></h2>
+							<p>{{ obj.description }}</p>
+							{% for sld in slide_list %}
+							{% if sld.slide_id == obj.id %}
+								<a href="http://docs.google.com/gview?url=http://darkfist.tk/qwerty.pptx&embedded=true" target="_blank">
+									<button class="btn btn-info">View Slides</button>
+								</a> &nbsp;
+							{% endif %}
+							{% endfor %}
+							<hr>
+						</div>
+						</div>
 
 				{% endfor %}
 			</div>
