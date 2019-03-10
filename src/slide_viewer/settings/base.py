@@ -112,4 +112,4 @@ MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), "media_cdn")
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
-LOGIN_REDIRECT_URL = '/slides/view-slides/'
+LOGIN_REDIRECT_URL = '/'

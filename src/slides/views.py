@@ -1,7 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
-from document_viewer.settings import CDN_DOMAIN
+from slide_viewer.settings import CDN_DOMAIN
 
 from .models import Slide, SlideUpload
 from .forms import AddSlide

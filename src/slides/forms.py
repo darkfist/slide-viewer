@@ -1,4 +1,6 @@
 from django import forms
+from django.core.validators import FileExtensionValidator
+
 
 class AddSlide(forms.Form):
 	title 		= forms.CharField()
