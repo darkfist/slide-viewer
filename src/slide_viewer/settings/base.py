@@ -60,8 +60,10 @@ WSGI_APPLICATION = 'slide_viewer.wsgi.application'
 # Database Settings
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE'    : 'django.db.backends.mysql',
+        'NAME'      : 'slidesDB',
+        'USER'      : 'root',
+        'PASSWORD'  : 'darkfist123',
     }
 }
 
@@ -99,9 +101,6 @@ USE_TZ = True
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 
-# domain of CDN where the slides will be uploaded
-CDN_DOMAIN = "http://127.0.0.1:8000"
-
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
 ]
@@ -110,6 +109,14 @@ STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), "static_cdn")
 MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), "media_cdn")
 
 
+# domain of CDN where the slides will be uploaded
+CDN_DOMAIN = "http://127.0.0.1:8000"
+
+# settings for ViewerJS Document Viewer
+VIEWERJS_URL = '/viewerjs/'
+VIEWERJS_ROOT = os.path.join(BASE_DIR, "ViewerJS")
+
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
+LOGIN_URL = '/users/login/'
 LOGIN_REDIRECT_URL = '/'

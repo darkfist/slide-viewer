@@ -22,9 +22,9 @@
 							<p>{{ obj.description }}</p>
 							{% for sld in slide_list %}
 							{% if sld.slide_id == obj.id %}
-								<a href="http://docs.google.com/gview?url=http://darkfist.tk/qwerty.pptx&embedded=true" target="_blank">
-									<button class="btn btn-info">View Slides</button>
-								</a> &nbsp;
+								<a href="/viewerjs/index.html#{{ cdn }}/media/{{ sld.slide_url }}" target="_blank">
+								<button class="btn btn-info" style="margin: 0 5px 10px 0;">View Slides</button>
+								</a>
 							{% endif %}
 							{% endfor %}
 							<hr>

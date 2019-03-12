@@ -40,13 +40,13 @@
 						</li>
 						{% if user.is_authenticated %}
 						<li>
-							<a class="page-scroll" href="{% url 'view' %}">Home</a>
+							<a class="page-scroll" href="{% url 'slides:view' %}">Home</a>
 						</li>
 						<li>
-							<a class="page-scroll" href="{% url 'add' %}">Add Slides</a>
+							<a class="page-scroll" href="{% url 'slides:add' %}">Add Slides</a>
 						</li>
 						<li>
-							<a class="page-scroll" href="{% url 'user_sld' %}">My Slides</a>
+							<a class="page-scroll" href="{% url 'slides:user_sld' %}">My Slides</a>
 						</li>
 						<li>
 							<a class="page-scroll" href="{% url 'logout' %}">Log Out</a>

@@ -1,31 +1,23 @@
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render, get_object_or_404
+from django.contrib import messages
+from django.shortcuts import render, redirect, get_object_or_404
 from slide_viewer.settings import CDN_DOMAIN
 
 from .models import Slide, SlideUpload
 from .forms import AddSlide
 
 
-@login_required(login_url='/login/')
+@login_required()
 def add_slides(request):
 	form = AddSlide(request.POST or None, request.FILES or None)
 	errors = None
 	if form.is_valid():
 		if request.user.is_authenticated():
 			
-			# looping through all file fields and saving it's name in a single string
-			all_sld_url = str(form.cleaned_data.get('slide'))
-			for i in range(2,11):
-				extra = 'slide' + str(i)
-				if (str(form.cleaned_data.get(extra)) != 'None'):
-					all_sld_url = all_sld_url + " " + str(form.cleaned_data.get(extra))
-			
 			# saving the details in the db
 			obj = Slide.objects.create(
 					title = form.cleaned_data.get('title'), 
 					description = form.cleaned_data.get('description'),
-					sld_url = all_sld_url,
 					uploaded_by = request.user
 				)
 
@@ -46,7 +38,7 @@ def add_slides(request):
 						name = form.cleaned_data.get('title'), 
 						slide_url = form.cleaned_data.get(extra),
 					)
-			return HttpResponseRedirect('/slides/view-slides/')
+			return redirect('slides:view')
 			
 	if form.errors:
 		errors = form.errors
@@ -68,11 +60,11 @@ def display_slides(request):
 	# domain of CDN where the slides will be uploaded
 	cdn = CDN_DOMAIN
 
-	context = {"object_list": queryset1, "slide_list":queryset2}
+	context = {"object_list": queryset1, "slide_list":queryset2, "cdn":cdn}
 	return render(request, template_name, context)
 
 
-@login_required(login_url='/login/')
+@login_required()
 def user_slides(request):
 	template_name = 'slides/user_slides.html'
 	
@@ -85,5 +77,15 @@ def user_slides(request):
 	# domain of CDN where the slides will be uploaded
 	cdn = CDN_DOMAIN
 
-	context = {"object_list": queryset1, "slide_list":queryset2}
+	context = {"object_list": queryset1, "slide_list":queryset2, "cdn":cdn}
 	return render(request, template_name, context)
+
+
+@login_required()
+def delete_slide(request, pk):
+	# querying Slide table from db to get single row and deleting it
+	instance1 = get_object_or_404(Slide, pk=pk).delete()
+	instance2 = SlideUpload.objects.filter(slide_id=pk).delete()
+
+	messages.success(request, "Successfully deleted the slides")
+	return redirect('slides:user_sld')
