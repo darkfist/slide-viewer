@@ -12,10 +12,15 @@ Accepted Slide Formats : ODP, FODP
 
 After cloning the repository on your machine move into the ```src\``` directory and install the dependencies by ```pip install requirements.txt```
 
-Create two directories ```media_cdn\``` and ```static_cdn\``` outside the ```src\``` directory.
+Then run the following commands to create the required directories:
+```
+~/src$ mkdir ../media_cdn
+~/src$ mkdir ../static_cdn
+```
 
 ##### Connecting to database:
-Create a database with name "slidesDB" and set the database settings in the settings file.
+This application requires MySQL Database.
+Create a database with name "imagesDB" and set the MySQL username and password in the ```base.py``` file of settings module present at ```src\slide_viewer\settings```.
 
 ## Starting the App
 from the ```src\``` directory run the following commands:
